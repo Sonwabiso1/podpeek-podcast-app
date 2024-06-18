@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const PodcastList = () => {
-  // Example podcasts
-  const podcasts = [
-    { id: 1, title: 'Podcast 1', description: 'Description of Podcast 1' },
-    { id: 2, title: 'Podcast 2', description: 'Description of Podcast 2' },
-    // Add more podcasts here
-  ];
+  const [podcasts, setPodcasts] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('https://podcast-api.netlify.app/');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setPodcasts(data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  if (error) {
+    return <div>Data fetching failed</div>;
+  }
 
   return (
     <div className="container mx-auto mt-8">

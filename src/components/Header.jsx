@@ -1,32 +1,47 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import headerimg from '../assets/images/Podpeek-logo.png'
+import { Link, NavLink } from 'react-router-dom';
+import headerimg from '../assets/images/Podpeek-logo.png';
+
+const activeStyles = {
+  fontWeight: 'bold',
+  color: '#e60000'
+};
 
 const Header = () => {
   return (
     <header className="bg-white text-sm text-[#e60000]">
-      <div className="w-full py-4 flex">
-        <div className="px-4"><Link to="/"><img src={headerimg} alt="podpeek logo image" className="mx-1 h-30 w-28" /></Link>
-      </div>
-      <div className="w-full pt-3">
-        <div className='py-1'>
-          <nav className='flex space-x-10'>
-            <Link to="/">About</Link>
-            <Link to="/">Contact</Link>
-          </nav>
+      <div className="flex items-start pt-4 pr-16">
+        <Link to="/">
+          <img src={headerimg} alt="podpeek logo image" className="w-[85px] h-[85px]" />
+        </Link>
+        <div className="pt-3 ml-7 flex-1">
+          <div className="py-1">
+            <nav className="flex space-x-10">
+              <Link to="/">About</Link>
+              <Link to="/">Contact</Link>
+            </nav>
           </div>
-          <hr className="w-full h-0.5 bg-red-600"/>
-        <div className="py-1">
-          <nav>
-            <Link>Subscribe to our newsletter</Link>
-          </nav>
+          <hr className="w-full h-[1px] bg-red-600" />
+          <div className="py-1">
+            <nav>
+              <Link to="/">Subscribe to our newsletter</Link>
+            </nav>
           </div>
+        </div>
       </div>
-        
-        {/* <nav>
-          <Link to="/" className="">Home</Link>
-          <Link to="/login">Login</Link>
-        </nav> */}
+      {/* secondary navigation */}
+      <div className="flex justify-between items-baseline -mt-[10px] pr-16">
+        <nav className="flex space-x-10 pl-[85px] ml-7 pb-4 font-bold">
+          <Link to="/">All Podcasts</Link>
+          <Link to="/genres">Genres</Link>
+          <Link to="/search">Search</Link>
+        </nav>
+        <button className="bg-red-600 text-white px-3 py-1">
+          <Link to="/login">Log-out</Link>
+        </button>
+      </div>
+      <div className="pl-[85px] ml-7 pr-16">
+        <hr className="w-full h-0.5 bg-red-600" />
       </div>
     </header>
   );

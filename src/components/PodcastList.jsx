@@ -26,18 +26,30 @@ const PodcastList = () => {
   }
 
   return (
-    <div className="container mx-auto mt-8">
+    <div className="pl-[85px] ml-7 pr-[64px] mt-8 text-[#e60000]">
       <h2 className="text-2xl font-bold mb-4">Podcasts</h2>
-      <ul>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {podcasts.map((podcast) => (
-          <li key={podcast.id} className="mb-4">
+          <div key={podcast.id} className="border border-[#e60000] rounded-lg p-4">
+            <img src={podcast.image} alt="podcast image" className="h-auto w-auto mb-2" />
             <h3 className="text-xl font-bold">{podcast.title}</h3>
-            <p>{podcast.description}</p>
-          </li>
+            <p className="text-sm">Seasons: {podcast.seasons}</p>
+            <p className="text-sm">Genre: {podcast.genres}</p>
+            <p className="text-sm">Updated: {new Date(podcast.updated).toLocaleDateString()}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
 
 export default PodcastList;
+
+{/* <ul>
+  {podcasts.map((podcast) => (
+    <li key={podcast.id} className="mb-4">
+      <h3 className="text-xl font-bold">{podcast.title}</h3>
+      <p>{podcast.description}</p>
+    </li>
+  ))}
+</ul> */}

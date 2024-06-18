@@ -5,8 +5,6 @@ import Login from './pages/Login';
 import Podcast from './pages/Podcast';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import PodcastPlayer from './components/PodcastPlayer';
-
 const AppRoutes = () => {
   return (
     <Router>
@@ -16,7 +14,6 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/podcast/:id" element={<Podcast />} />
       </Routes>
-      <PodcastPlayer />
       <Footer />
     </Router>
   );

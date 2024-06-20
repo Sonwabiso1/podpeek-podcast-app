@@ -1,15 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const PodcastCarousel = ({ podcasts }) => {
   const carouselRef = useRef(null);
-  const [randomPodcasts, setRandomPodcasts] = useState([]);
-
-  useEffect(() => {
-    // Shuffle podcasts and select 7
-    const shuffledPodcasts = podcasts.sort(() => 0.5 - Math.random());
-    setRandomPodcasts(shuffledPodcasts.slice(0, 7));
-  }, [podcasts]);
 
   const scrollLeft = () => {
     carouselRef.current.scrollBy({ left: -300, behavior: 'smooth' });
@@ -18,6 +11,14 @@ const PodcastCarousel = ({ podcasts }) => {
   const scrollRight = () => {
     carouselRef.current.scrollBy({ left: 300, behavior: 'smooth' });
   };
+
+  // Get a random subset of 7 podcasts
+  const getRandomPodcasts = (podcasts) => {
+    const shuffled = [...podcasts].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 7);
+  };
+
+  const randomPodcasts = getRandomPodcasts(podcasts);
 
   return (
     <div className="pl-[85px] ml-7 pr-[64px] mt-8 text-[#e60000]">
@@ -34,7 +35,7 @@ const PodcastCarousel = ({ podcasts }) => {
               </Link>
               <div className="w-2/3 ml-4 overflow-hidden">
                 <h3 className="text-xl font-bold">{podcast.title}</h3>
-                <p className="text-sm overflow-y-auto max-h-36 scrollbar-hide">{podcast.description}</p>
+                <p className="text-sm overflow-y-auto max-h-36">{podcast.description}</p>
               </div>
             </div>
           ))}

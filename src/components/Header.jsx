@@ -33,10 +33,10 @@ const Header = () => {
       <div className="flex justify-between items-baseline -mt-[10px] pr-16">
         <nav className="flex space-x-10 pl-[85px] ml-7 pb-4 font-bold">
           <Link to="/">All Podcasts</Link>
-          <Link to="/genres">Genres</Link>
+          <Link to="/favourites">Favourites</Link>
           <Link to="/search">Search</Link>
         </nav>
-        <button className="bg-red-600 text-white px-3 py-1">
+        <button className="bg-red-600 text-white px-3 py-1 rounded-lg">
           <Link to="/login">Log-out</Link>
         </button>
       </div>

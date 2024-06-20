@@ -13,9 +13,9 @@ const PodcastCarousel = ({ podcasts }) => {
   };
 
   return (
-    <div className="pl-[85px] ml-7 pr-[64px] mt-8 text-[#e60000] relative">
+    <div className="pl-[85px] ml-7 pr-[64px] mt-8 text-[#e60000]">
       <h2 className="text-2xl font-bold mb-4">Featured Podcasts</h2>
-      <div className="flex items-center">
+      <div className="relative flex items-center">
         <button onClick={scrollLeft} className="absolute left-0 ml-2 z-10 bg-gray-200 p-2 rounded-full">
           &lt;
         </button>

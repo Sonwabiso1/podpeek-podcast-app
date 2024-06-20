@@ -6,22 +6,58 @@ import Podcast from './pages/Podcast';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Favourites from './components/Favourites';
+import PodcastList from './components/PodcastList';
 
-const AppRoutes = () => {
+const Layout = ({ children }) => {
   const location = useLocation();
   const isLoginPage = location.pathname === '/';
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       {!isLoginPage && <Header />}
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/favourites" element={<Favourites />} />
-        <Route path="/podcast/:id" element={<Podcast />} />
-      </Routes>
+      <main className="flex-grow">{children}</main>
       {!isLoginPage && <Footer />}
-    </>
+    </div>
+  );
+};
+
+const AppRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route
+        path="/home"
+        element={
+          <Layout>
+            <Home />
+          </Layout>
+        }
+      />
+      <Route
+        path="/favourites"
+        element={
+          <Layout>
+            <Favourites />
+          </Layout>
+        }
+      />
+      <Route
+        path="/podcast/:id"
+        element={
+          <Layout>
+            <Podcast />
+          </Layout>
+        }
+      />
+      <Route
+        path="/podcasts"
+        element={
+          <Layout>
+            <PodcastList />
+          </Layout>
+        }
+      />
+    </Routes>
   );
 };
 

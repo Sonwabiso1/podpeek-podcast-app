@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import LoadingScreen from '../components/LoadingScreen';
 
 const Podcast = () => {
   const { id } = useParams();
@@ -28,7 +29,7 @@ const Podcast = () => {
   }
 
   if (!podcast) {
-    return <div>Loading...</div>;
+    return <div><LoadingScreen/> </div>;
   }
 
   return (

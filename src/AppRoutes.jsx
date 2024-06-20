@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import Podcast from './pages/Podcast';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Favourites from './components/Favourites';
+import Favorites from './pages/Favorites';
 import PodcastList from './components/PodcastList';
 import { AuthContext } from './context/AuthContext';
 
@@ -42,10 +42,10 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/favourites"
+        path="/favorites"
         element={
           <Layout>
-            <Favourites />
+            <Favorites />
           </Layout>
         }
       />

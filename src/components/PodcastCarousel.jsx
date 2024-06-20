@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const PodcastCarousel = ({ podcasts }) => {
   const carouselRef = useRef(null);
@@ -21,7 +22,9 @@ const PodcastCarousel = ({ podcasts }) => {
         <div ref={carouselRef} className="flex overflow-x-auto space-x-4 scrollbar-hide">
           {podcasts.map((podcast) => (
             <div key={podcast.id} className="min-w-[300px] border border-[#e60000] rounded-lg p-4 flex-shrink-0 flex h-48 w-full">
-              <img src={podcast.image} alt="podcast image" className="h-40 w-40 object-cover mb-2" />
+              <Link to={`/podcast/${podcast.id}`} className="w-full">
+                <img src={podcast.image} alt="podcast image" className="h-40 w-40 object-cover mb-2" />
+              </Link>
               <div className="ml-4">
                 <h3 className="text-xl font-bold">{podcast.title}</h3>
                 <p className="text-sm">{podcast.description}</p>

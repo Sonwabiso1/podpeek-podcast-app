@@ -35,14 +35,13 @@ const PodcastList = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {podcasts.map((podcast) => (
             <div key={podcast.id} className="border border-[#e60000] rounded-lg p-4">
-              <img src={podcast.image} alt="podcast image" className="h-auto w-auto mb-2" />
+              <Link to={`/podcast/${podcast.id}`} className="">
+                <img src={podcast.image} alt="podcast image" className="h-auto w-auto mb-2" />
+              </Link>
               <h3 className="text-xl font-bold">{podcast.title}</h3>
               <p className="text-sm">Seasons: {podcast.seasons}</p>
               <p className="text-sm">Genre: {podcast.genres}</p>
               <p className="text-sm">Updated: {new Date(podcast.updated).toLocaleDateString()}</p>
-              <Link to={`/podcast/${podcast.id}`} className="text-gray-500 hover:underline">
-                View Details
-              </Link>
             </div>
           ))}
         </div>

@@ -37,7 +37,7 @@ const Header = () => {
           <Link to="/search">Search</Link>
         </nav>
         <button className="bg-red-600 text-white px-3 py-1 rounded-lg">
-          <Link to="/login">Log-out</Link>
+          <Link to="/">Log-out</Link>
         </button>
       </div>
       <div className="pl-[85px] ml-7 pr-16">

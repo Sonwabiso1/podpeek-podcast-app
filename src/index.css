@@ -12,4 +12,15 @@
     scrollbar-width: none;  /* Firefox */
   }
 }
+/* In your global CSS file (e.g., styles.css or global.css) */
+.loader {
+  border-top-color: #3498db;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 

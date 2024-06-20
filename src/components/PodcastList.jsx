@@ -27,8 +27,9 @@ const PodcastList = () => {
   }
 
   return (
-    <div className="pl-[85px] ml-7 pr-[64px] mt-8 text-[#e60000]">
+    <div>
       <PodcastCarousel podcasts={podcasts} />
+    <div className="pl-[85px] ml-7 pr-[64px] mt-8 text-[#e60000]">
       <h2 className="text-2xl font-bold mb-4">All Podcasts</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {podcasts.map((podcast) => (
@@ -41,6 +42,7 @@ const PodcastList = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

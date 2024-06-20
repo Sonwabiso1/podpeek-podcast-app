@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PodcastCarousel from '../components/PodcastCarousel';
 
 const PodcastList = () => {
   const [podcasts, setPodcasts] = useState([]);
@@ -27,7 +28,8 @@ const PodcastList = () => {
 
   return (
     <div className="pl-[85px] ml-7 pr-[64px] mt-8 text-[#e60000]">
-      <h2 className="text-2xl font-bold mb-4">Podcasts</h2>
+      <PodcastCarousel podcasts={podcasts} />
+      <h2 className="text-2xl font-bold mb-4">All Podcasts</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {podcasts.map((podcast) => (
           <div key={podcast.id} className="border border-[#e60000] rounded-lg p-4">

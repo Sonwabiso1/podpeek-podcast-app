@@ -21,7 +21,7 @@ const Header = () => {
               <Link to="/">Contact</Link>
             </nav>
           </div>
-          <hr className="w-full h-0.5 bg-red-600" />
+          <hr className="w-full h-[1.5px] bg-red-600" />
           <div className="py-1">
             <nav>
               <Link to="/">Subscribe to our newsletter</Link>

@@ -1,55 +1,59 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import LoadingScreen from './LoadingScreen';
 
 const Login = () => {
-  const [loading, setLoading] = useState(false);
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [credentials, setCredentials] = useState({ username: '', password: '' });
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    // Simulate a login delay
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    // Perform your login logic here
-    // After login, redirect to the home page
-    navigate('/home');
-    setLoading(false);
+  const handleChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-  if (loading) {
-    return <LoadingScreen />;
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Simulate an API call
+    setTimeout(() => {
+      login();
+      navigate('/home');
+    }, 1000);
+  };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Login</h2>
-        <form onSubmit={handleLogin}>
-          <div className="mb-4">
-            <label className="block text-gray-700">Email</label>
+    <div className="flex items-center justify-center min-h-screen">
+      {loading ? (
+        <LoadingScreen />
+      ) : (
+        <form onSubmit={handleSubmit} className="w-full max-w-md p-8 space-y-6 bg-white rounded shadow-md">
+          <h2 className="text-2xl font-bold text-center">Login</h2>
+          <div className="space-y-4">
             <input
-              type="email"
-              className="w-full p-2 border border-gray-300 rounded mt-1"
-              required
+              type="text"
+              name="username"
+              value={credentials.username}
+              onChange={handleChange}
+              placeholder="Username"
+              className="w-full px-3 py-2 border rounded"
             />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Password</label>
             <input
               type="password"
-              className="w-full p-2 border border-gray-300 rounded mt-1"
-              required
+              name="password"
+              value={credentials.password}
+              onChange={handleChange}
+              placeholder="Password"
+              className="w-full px-3 py-2 border rounded"
             />
           </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition duration-200"
-          >
+          <button type="submit" className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
             Login
           </button>
         </form>
-      </div>
+      )}
     </div>
   );
 };

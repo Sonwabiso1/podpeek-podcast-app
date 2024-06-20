@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Podcast from './pages/Podcast';
@@ -7,10 +7,16 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Favourites from './components/Favourites';
 import PodcastList from './components/PodcastList';
+import { AuthContext } from './context/AuthContext';
 
 const Layout = ({ children }) => {
   const location = useLocation();
   const isLoginPage = location.pathname === '/';
+  const { isLoggedIn } = useContext(AuthContext);
+
+  if (isLoginPage && isLoggedIn) {
+    return <Navigate to="/home" />;
+  }
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -22,9 +28,11 @@ const Layout = ({ children }) => {
 };
 
 const AppRoutes = () => {
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={isLoggedIn ? <Navigate to="/home" /> : <Login />} />
       <Route
         path="/home"
         element={
@@ -61,4 +69,4 @@ const AppRoutes = () => {
   );
 };
 
-export default AppRoutes
+export default AppRoutes;

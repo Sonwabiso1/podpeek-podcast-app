@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import headerimg from '../assets/images/Podpeek-logo.png';
+import { AuthContext } from '../context/AuthContext';
+import { useContext } from 'react';
+
 
 const activeStyles = {
   fontWeight: 'bold',
@@ -8,6 +11,7 @@ const activeStyles = {
 };
 
 const Header = () => {
+  const { logout } = useContext(AuthContext);
   return (
     <header className="bg-white text-sm text-[#e60000]">
       <div className="flex items-start pt-4 pr-16">
@@ -36,7 +40,7 @@ const Header = () => {
           <Link to="/favourites">Favourites</Link>
           <Link to="/search">Search</Link>
         </nav>
-        <button className="bg-red-600 text-white px-3 py-1 rounded-lg">
+        <button  onClick={logout} className="bg-red-600 text-white px-3 py-1 rounded-lg">
           <Link to="/">Log-out</Link>
         </button>
       </div>

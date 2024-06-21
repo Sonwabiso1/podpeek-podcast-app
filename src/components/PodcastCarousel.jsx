@@ -35,7 +35,7 @@ const PodcastCarousel = ({ podcasts }) => {
               </Link>
               <div className="w-full ml-4 overflow-hidden">
                 <h3 className="text-xl font-bold">{podcast.title}</h3>
-                <p className="text-sm overflow-scroll h-auto">{podcast.description}</p>
+                <p className="text-sm overflow-scroll h-auto scrollbar-hide">{podcast.description}</p>
               </div>
             </div>
           ))}

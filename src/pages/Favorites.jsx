@@ -38,7 +38,9 @@ const Favorites = () => {
                   <div className="mb-4">
                     <h4 className="text-lg font-bold">Genres</h4>
                     <div>
-                      {podcast.genres.filter(genre => genre.toLowerCase() !== 'all').join(', ')}
+                      {podcast.genres
+                        .filter(genre => typeof genre === 'string' && genre.toLowerCase() !== 'all')
+                        .join(', ')}
                     </div>
                   </div>
                 )}

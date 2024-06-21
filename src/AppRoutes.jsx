@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Favorites from './pages/Favorites';
 import PodcastList from './components/PodcastList';
+import Search from './pages/Search';
 import { AuthContext } from './context/AuthContext';
 
 const Layout = ({ children }) => {
@@ -29,6 +30,17 @@ const Layout = ({ children }) => {
 
 const AppRoutes = () => {
   const { isLoggedIn } = useContext(AuthContext);
+  const [shows, setShows] = useState([]);
+
+  useEffect(() => {
+    const fetchShows = async () => {
+      const response = await fetch('https://podcast-api.netlify.app/shows');
+      const data = await response.json();
+      setShows(data);
+    };
+
+    fetchShows();
+  }, []);
 
   return (
     <Routes>
@@ -62,6 +74,14 @@ const AppRoutes = () => {
         element={
           <Layout>
             <PodcastList />
+          </Layout>
+        }
+      />
+      <Route
+        path="/search"
+        element={
+          <Layout>
+            <Search shows={shows} />
           </Layout>
         }
       />

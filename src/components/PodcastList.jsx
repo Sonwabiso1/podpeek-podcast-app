@@ -7,7 +7,7 @@ const PodcastList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchPodcasts = async () => {
       try {
         const response = await fetch('https://podcast-api.netlify.app/');
         if (!response.ok) {
@@ -20,12 +20,38 @@ const PodcastList = () => {
       }
     };
 
-    fetchPosts();
+    fetchPodcasts();
   }, []);
 
   if (error) {
     return <div>Data fetching failed: {error}</div>;
   }
+
+  const genres = [
+    { id: 0, name: 'All' },
+    { id: 1, name: 'Personal Growth' },
+    { id: 2, name: 'Investigative Journalism' },
+    { id: 3, name: 'History' },
+    { id: 4, name: 'Comedy' },
+    { id: 5, name: 'Entertainment' },
+    { id: 6, name: 'Business' },
+    { id: 7, name: 'Fiction' },
+    { id: 8, name: 'News' },
+    { id: 9, name: 'Kids and Family' },
+  ];
+
+  const getGenresFromIds = (genreIds) => {
+    return genreIds.map(id => {
+      const genre = genres.find(genre => genre.id === id);
+      return genre ? genre.name : '';
+    }).filter(Boolean); // Filter out any empty strings
+  };
+  // Function to format date as "day month in words, year"
+  const formatDate = (dateString) => {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
 
   // Sort podcasts alphabetically for the main list
   const sortedPodcasts = [...podcasts].sort((a, b) => a.title.localeCompare(b.title));
@@ -44,8 +70,8 @@ const PodcastList = () => {
                 </Link>
                 <h3 className="text-xl font-bold">{podcast.title}</h3>
                 <p className="text-sm">Seasons: {podcast.seasons}</p>
-                <p className="text-sm">Genre: {podcast.genres.join(', ')}</p>
-                <p className="text-sm">Updated: {new Date(podcast.updated).toLocaleDateString()}</p>
+                <p className="text-sm">Genres: {getGenresFromIds(podcast.genres).join(', ')}</p>
+                <p className="text-sm">Updated: {formatDate(podcast.updated)}</p>
               </div>
             </div>
           ))}

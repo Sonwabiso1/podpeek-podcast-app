@@ -20,23 +20,25 @@ const Favorites = () => {
       <h2 className="text-2xl font-bold mb-4">My Favorites</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {favorites.map((podcast) => (
-          <div key={podcast.id} className="border border-[#e60000] rounded-lg p-4 flex flex-col justify-between">
-            <div>
-              <Link to={`/podcast/${podcast.id}`} className="">
-                <img src={podcast.image} alt="podcast image" className="h-auto w-auto mb-2" />
-              </Link>
-              <h3 className="text-xl font-bold">{podcast.title}</h3>
-              <p className="text-sm">Seasons: {podcast.seasons}</p>
-              <p className="text-sm">Genre: {podcast.genres}</p>
-              <p className="text-sm">Updated: {new Date(podcast.updated).toLocaleDateString()}</p>
+          podcast && podcast.id ? (
+            <div key={podcast.id} className="border border-[#e60000] rounded-lg p-4 flex flex-col justify-between">
+              <div>
+                <Link to={`/podcast/${podcast.id}`} className="">
+                  <img src={podcast.image} alt="podcast image" className="h-auto w-auto mb-2" />
+                </Link>
+                <h3 className="text-xl font-bold">{podcast.title}</h3>
+                <p className="text-sm">Seasons: {podcast.seasons}</p>
+                <p className="text-sm">Genre: {podcast.genres.join(', ')}</p>
+                <p className="text-sm">Updated: {new Date(podcast.updated).toLocaleDateString()}</p>
+              </div>
+              <button
+                onClick={() => removeFavorite(podcast.id)}
+                className="mt-2 px-4 py-2 bg-[#e60000] text-white rounded"
+              >
+                Remove from Favorites
+              </button>
             </div>
-            <button
-              onClick={() => removeFavorite(podcast.id)}
-              className="mt-2 px-4 py-2 bg-[#e60000] text-white rounded"
-            >
-              Remove from Favorites
-            </button>
-          </div>
+          ) : null
         ))}
       </div>
     </div>

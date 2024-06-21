@@ -4,7 +4,6 @@ import PodcastCarousel from '../components/PodcastCarousel';
 
 const PodcastList = () => {
   const [podcasts, setPodcasts] = useState([]);
-  const [favorites, setFavorites] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -16,10 +15,6 @@ const PodcastList = () => {
         }
         const data = await response.json();
         setPodcasts(data);
-
-        // Load favorites from localStorage
-        const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        setFavorites(savedFavorites);
       } catch (error) {
         setError(error.message);
       }
@@ -27,17 +22,6 @@ const PodcastList = () => {
 
     fetchPosts();
   }, []);
-
-  const toggleFavorite = (podcast) => {
-    let updatedFavorites;
-    if (favorites.some(fav => fav.id === podcast.id)) {
-      updatedFavorites = favorites.filter(fav => fav.id !== podcast.id);
-    } else {
-      updatedFavorites = [...favorites, podcast];
-    }
-    setFavorites(updatedFavorites);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-  };
 
   if (error) {
     return <div>Data fetching failed: {error}</div>;
@@ -60,15 +44,9 @@ const PodcastList = () => {
                 </Link>
                 <h3 className="text-xl font-bold">{podcast.title}</h3>
                 <p className="text-sm">Seasons: {podcast.seasons}</p>
-                <p className="text-sm">Genre: {podcast.genres}</p>
+                <p className="text-sm">Genre: {podcast.genres.join(', ')}</p>
                 <p className="text-sm">Updated: {new Date(podcast.updated).toLocaleDateString()}</p>
               </div>
-              <button
-                onClick={() => toggleFavorite(podcast)}
-                className="mt-2 px-4 py-2 bg-[#e60000] text-white rounded"
-              >
-                {favorites.some(fav => fav.id === podcast.id) ? 'Remove from Favorites' : 'Add to Favorites'}
-              </button>
             </div>
           ))}
         </div>

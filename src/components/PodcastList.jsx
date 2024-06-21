@@ -5,6 +5,8 @@ import PodcastCarousel from '../components/PodcastCarousel';
 const PodcastList = () => {
   const [podcasts, setPodcasts] = useState([]);
   const [error, setError] = useState(null);
+  const [selectedGenre, setSelectedGenre] = useState('All');
+  const [sortCriteria, setSortCriteria] = useState('AZ');
 
   useEffect(() => {
     const fetchPodcasts = async () => {
@@ -46,21 +48,60 @@ const PodcastList = () => {
       return genre ? genre.name : '';
     }).filter(Boolean); // Filter out any empty strings
   };
+
   // Function to format date as "day month in words, year"
   const formatDate = (dateString) => {
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  const filterByGenre = (podcasts, genre) => {
+    if (genre === 'All') {
+      return podcasts;
+    }
+    return podcasts.filter(podcast =>
+      getGenresFromIds(podcast.genres).includes(genre)
+    );
+  };
 
-  // Sort podcasts alphabetically for the main list
-  const sortedPodcasts = [...podcasts].sort((a, b) => a.title.localeCompare(b.title));
+  const sortPodcasts = (podcasts, criteria) => {
+    switch (criteria) {
+      case 'AZ':
+        return [...podcasts].sort((a, b) => a.title.localeCompare(b.title));
+      case 'ZA':
+        return [...podcasts].sort((a, b) => b.title.localeCompare(a.title));
+      case 'NewlyUpdated':
+        return [...podcasts].sort((a, b) => new Date(b.updated) - new Date(a.updated));
+      case 'OldestUpdated':
+        return [...podcasts].sort((a, b) => new Date(a.updated) - new Date(b.updated));
+      default:
+        return podcasts;
+    }
+  };
+
+  const filteredPodcasts = filterByGenre(podcasts, selectedGenre);
+  const sortedPodcasts = sortPodcasts(filteredPodcasts, sortCriteria);
 
   return (
     <div>
       <PodcastCarousel podcasts={podcasts} />
       <div className="pl-[85px] ml-7 pr-[64px] mt-8 text-[#e60000]">
         <h2 className="text-2xl font-bold mb-4">All Podcasts</h2>
+        <div className="mb-4 flex flex-wrap gap-2">
+          <select
+            value={selectedGenre}
+            onChange={(e) => setSelectedGenre(e.target.value)}
+            className="p-2 rounded bg-white border border-gray-400 text-gray-800"
+          >
+            {genres.map((genre) => (
+              <option key={genre.id} value={genre.name}>{genre.name}</option>
+            ))}
+          </select>
+          <button onClick={() => setSortCriteria('AZ')} className="p-2 rounded bg-red-600 text-white">A-Z</button>
+          <button onClick={() => setSortCriteria('ZA')} className="p-2 rounded bg-red-600 text-white">Z-A</button>
+          <button onClick={() => setSortCriteria('NewlyUpdated')} className="p-2 rounded bg-red-600 text-white">Newly Updated</button>
+          <button onClick={() => setSortCriteria('OldestUpdated')} className="p-2 rounded bg-red-600 text-white">Oldest Updated</button>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {sortedPodcasts.map((podcast) => (
             <div key={podcast.id} className="border border-[#e60000] rounded-lg p-4 flex flex-col justify-between">

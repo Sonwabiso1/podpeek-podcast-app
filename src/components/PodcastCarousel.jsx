@@ -30,12 +30,12 @@ const PodcastCarousel = ({ podcasts }) => {
         <div ref={carouselRef} className="flex overflow-x-auto space-x-4 scrollbar-hide">
           {randomPodcasts.map((podcast) => (
             <div key={podcast.id} className="min-w-[300px] border border-[#e60000] rounded-lg p-4 flex-shrink-0 flex h-48 w-full">
-              <Link to={`/podcast/${podcast.id}`} className="w-1/3">
+              <Link to={`/podcast/${podcast.id}`} className="w-auto">
                 <img src={podcast.image} alt="podcast image" className="h-full w-full object-cover mb-2 rounded-lg" />
               </Link>
-              <div className="w-2/3 ml-4 overflow-hidden">
+              <div className="w-full ml-4 overflow-hidden">
                 <h3 className="text-xl font-bold">{podcast.title}</h3>
-                <p className="text-sm overflow-y-auto max-h-36">{podcast.description}</p>
+                <p className="text-sm overflow-scroll h-auto">{podcast.description}</p>
               </div>
             </div>
           ))}

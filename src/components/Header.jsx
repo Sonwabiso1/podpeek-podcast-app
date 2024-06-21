@@ -21,14 +21,14 @@ const Header = () => {
         <div className="pt-3 ml-7 flex-1">
           <div className="py-1">
             <nav className="flex space-x-10">
-              <Link to="/">About</Link>
-              <Link to="/">Contact</Link>
+              <Link to="/about">About</Link>
+              <Link to="/contact">Contact</Link>
             </nav>
           </div>
           <hr className="w-full h-[1.5px] bg-red-600" />
           <div className="py-1">
             <nav>
-              <Link to="/">Subscribe to our newsletter</Link>
+              <Link to="/subscribe">Subscribe to our newsletter</Link>
             </nav>
           </div>
         </div>

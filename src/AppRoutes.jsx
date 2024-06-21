@@ -8,6 +8,9 @@ import Footer from './components/Footer';
 import Favorites from './pages/Favorites';
 import PodcastList from './components/PodcastList';
 import Search from './pages/Search';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Subscribe from './pages/Newsletter';
 import { AuthContext } from './context/AuthContext';
 
 const Layout = ({ children }) => {
@@ -82,6 +85,30 @@ const AppRoutes = () => {
         element={
           <Layout>
             <Search shows={shows} />
+          </Layout>
+        }
+      />
+      <Route
+        path="/about"
+        element={
+          <Layout>
+            <About />
+          </Layout>
+        }
+      />
+      <Route
+        path="/contact"
+        element={
+          <Layout>
+            <Contact />
+          </Layout>
+        }
+      />
+      <Route
+        path="/subscribe"
+        element={
+          <Layout>
+            <Subscribe />
           </Layout>
         }
       />

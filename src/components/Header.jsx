@@ -1,14 +1,8 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import headerimg from '../assets/images/Podpeek-logo.png';
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
-
-
-const activeStyles = {
-  fontWeight: 'bold',
-  color: '#e60000'
-};
 
 const Header = () => {
   const { logout } = useContext(AuthContext);

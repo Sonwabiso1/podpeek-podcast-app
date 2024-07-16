@@ -22,8 +22,6 @@ const Favorites = () => {
         return [...favorites].sort((a, b) => a.title.localeCompare(b.title));
       case 'ZA':
         return [...favorites].sort((a, b) => b.title.localeCompare(a.title));
-      case 'Genre':
-        return [...favorites].sort((a, b) => (a.genres[0] || '').localeCompare(b.genres[0] || ''));
       case 'NewlyUpdated':
         return [...favorites].sort((a, b) => new Date(b.updated) - new Date(a.updated));
       case 'OldestUpdated':
@@ -41,7 +39,6 @@ const Favorites = () => {
       <div className="mb-4">
         <button onClick={() => setSortCriteria('AZ')} className="mr-2 p-2 rounded bg-red-600 text-white">A-Z</button>
         <button onClick={() => setSortCriteria('ZA')} className="mr-2 p-2 rounded bg-red-600 text-white">Z-A</button>
-        <button onClick={() => setSortCriteria('Genre')} className="mr-2 p-2 rounded bg-red-600 text-white">Genre</button>
         <button onClick={() => setSortCriteria('NewlyUpdated')} className="mr-2 p-2 rounded bg-red-600 text-white">Newly Updated</button>
         <button onClick={() => setSortCriteria('OldestUpdated')} className="mr-2 p-2 rounded bg-red-600 text-white">Oldest Updated</button>
         <button onClick={handleResetFavorites} className="p-2 rounded bg-red-600 text-white">Reset Favorites</button>
